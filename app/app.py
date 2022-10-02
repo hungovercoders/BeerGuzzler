@@ -1,5 +1,3 @@
-import csv
-import json
 from bs4 import BeautifulSoup
 
 def get_beer_config():
@@ -35,8 +33,8 @@ def guzzle_beer(url:str,beers_class: str, beer_class: str, beer_config: dict):
     with open(url) as page:
         soup = BeautifulSoup(page,"html.parser")
         contents = soup.find("div", class_=beers_class)
-        specific = contents.find_all("div", {"class": beer_class})
-        for beer in specific:
+        beers = contents.find_all("div", {"class": beer_class})
+        for beer in beers:
             beer_dict = {}
             for key in beer_config:
                 dom_object = beer_config[key]["dom_object"]
